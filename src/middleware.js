@@ -18,7 +18,7 @@ const middleware = () => {
         const thunk = generateThunk(action)
         return new Promise((resolve, reject) => {
           responses[thunk.key] = (err, response) =>
-            err ? reject(response || new Error({ error: err })) : resolve(response)
+            err ? reject(response || { error: err }) : resolve(response)
           next(createThunkAction(action, thunk))
         })
       }
